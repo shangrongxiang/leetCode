@@ -8,32 +8,24 @@ Each child must have at least one candy.
 Children with a higher rating get more 
 candies than their neighbors.
 What is the minimum candies you must give?'''
-rating = [1,3,6,6,6,2,1]
+rating = [1,3,4,5,2]
 def candy(rating):
-    numbers_candys = len(rating)
+    numbers_candys = 0
     num = []
-    if rating[0] > rating[1] :
-        num.append(2)
-        numbers_candys += 1
-    else:
+    for i in range(len(rating)):
         num.append(1)
-    
+    for i in range(len(rating)-1):
+        
+        if rating[i+1] > rating[i]:
+            
+            num[i+1] = num[i]+1
 
-    for i in range(len(rating)-2):
-        print(rating[i+1])
-        if rating[i+1] >= rating[i] or rating[i+1] >= rating[i+2]:
-            if not (rating[i+1] == rating[i] and rating[i+1] == rating[i+2]):
-                num.append(2)
-            else:
-                num.append(1)
-        else:
-            num.append(1)
-    if rating[len(rating)-1] > rating[len(rating)-2]:
-        num.append(2)
-        numbers_candys += 1
-    else:
-        num.append(1)
+    for i in range(len(rating)-1):
+        if rating[len(rating)-2-i] > rating[len(rating)-1-i] and num[len(rating)-2-i] <= num[len(rating)-1-i]:
+            num[len(rating)-2-i] = num[len(rating)-1-i] + 1
     print(num)
+    for i in num:
+        numbers_candys += i
     return numbers_candys
     
-candy(rating)
+print(candy(rating))
